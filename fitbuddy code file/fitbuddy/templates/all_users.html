@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>All Users — FitBuddy Admin</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="/">Fit<span>Buddy</span></a>
+      <nav class="topnav">
+        <a href="/">Generate Plan</a>
+        <a href="/view-all-users">Admin View</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" style="padding-bottom:40px;">
+    <div class="wrap" style="grid-template-columns:1fr;">
+      <div>
+        <div class="hero-eyebrow">COACH / ADMIN DASHBOARD</div>
+        <h1 style="font-size:clamp(2rem,4vw,3rem);">All registered users</h1>
+        <p class="lead">{{ users|length }} user{{ 's' if users|length != 1 else '' }} tracked · original and feedback-updated plans side by side.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:32px;">
+    <div class="wrap">
+      <div class="panel" style="padding:0; overflow-x:auto;">
+        <table class="users">
+          <thead>
+            <tr>
+              <th>User ID</th>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Weight</th>
+              <th>Goal</th>
+              <th>Intensity</th>
+              <th>Original Plan</th>
+              <th>Updated Plan</th>
+              <th>Feedback</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for user in users %}
+            <tr>
+              <td>{{ user.user_id }}</td>
+              <td>{{ user.name }}</td>
+              <td>{{ user.age }}</td>
+              <td>{{ user.weight }} kg</td>
+              <td>{{ user.goal }}</td>
+              <td>{{ user.intensity }}</td>
+              <td class="plan-cell">
+                {% if user.plan and user.plan.original_plan %}{{ user.plan.original_plan }}{% else %}<span class="empty">—</span>{% endif %}
+              </td>
+              <td class="plan-cell">
+                {% if user.plan and user.plan.updated_plan %}{{ user.plan.updated_plan }}{% else %}<span class="empty">No feedback yet</span>{% endif %}
+              </td>
+              <td class="plan-cell">
+                {% if user.plan and user.plan.feedback %}{{ user.plan.feedback }}{% else %}<span class="empty">—</span>{% endif %}
+              </td>
+            </tr>
+            {% else %}
+            <tr><td colspan="9" class="empty" style="padding:24px;">No users yet — generate a plan to see it here.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">FitBuddy — FastAPI · SQLite · Gemini 1.5 Pro &amp; Flash</div>
+  </footer>
+
+</body>
+</html>

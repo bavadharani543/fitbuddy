@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FitBuddy — AI Fitness Plan Generator</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="/">Fit<span>Buddy</span></a>
+      <nav class="topnav">
+        <a href="/">Generate Plan</a>
+        <a href="/view-all-users">Admin View</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <div class="hero-eyebrow">POWERED BY GEMINI 1.5 PRO + FLASH</div>
+        <h1>Your plan.<br>Built for one person: you.</h1>
+        <p class="lead">Tell FitBuddy your goal and intensity — get a structured 7‑day workout plan and a nutrition tip in seconds, refined every time you give feedback.</p>
+        <div class="hero-stats">
+          <div><strong>7</strong><span>Day Plan</span></div>
+          <div><strong>2</strong><span>Gemini Models</span></div>
+          <div><strong>∞</strong><span>Feedback Loops</span></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3 style="margin-bottom:4px;">Start your plan</h3>
+        <p style="color:var(--muted); font-size:.9rem; margin-bottom:22px;">Fill in your details below.</p>
+
+        <form class="stack" action="/generate-workout" method="post">
+          <div class="row-2">
+            <div class="field">
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" placeholder="Priya Sharma" required>
+            </div>
+            <div class="field">
+              <label for="user_id">User ID</label>
+              <input id="user_id" name="user_id" type="text" placeholder="priya01" required>
+            </div>
+          </div>
+
+          <div class="row-2">
+            <div class="field">
+              <label for="age">Age</label>
+              <input id="age" name="age" type="number" min="10" max="100" placeholder="28" required>
+            </div>
+            <div class="field">
+              <label for="weight">Weight (kg)</label>
+              <input id="weight" name="weight" type="number" step="0.1" min="20" placeholder="64" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="goal">Fitness Goal</label>
+            <select id="goal" name="goal" required>
+              <option value="">Select a goal…</option>
+              <option>Weight loss</option>
+              <option>Muscle gain</option>
+              <option>General wellness</option>
+              <option>Flexibility</option>
+              <option>Endurance</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="intensity">Preferred Workout Intensity</label>
+            <select id="intensity" name="intensity" required>
+              <option value="">Select intensity…</option>
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+
+          <button class="btn" type="submit">Generate Plan →</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <span class="badge">HOW IT WORKS</span>
+      <h2 style="margin-top:14px;">Three steps, one adaptive plan</h2>
+      <div class="row-2" style="grid-template-columns:repeat(3,1fr); margin-top:24px;">
+        <div class="panel">
+          <h3>1. Generate</h3>
+          <p style="color:var(--muted);">Gemini 1.5 Pro builds a day-by-day, goal-specific 7-day workout plan from your inputs.</p>
+        </div>
+        <div class="panel">
+          <h3>2. Refine</h3>
+          <p style="color:var(--muted);">Submit feedback — "more cardio", "more rest days" — and your plan is revised on the spot.</p>
+        </div>
+        <div class="panel">
+          <h3>3. Track</h3>
+          <p style="color:var(--muted);">Coaches and admins can review every user's original and updated plans from one dashboard.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">FitBuddy — FastAPI · SQLite · Gemini 1.5 Pro &amp; Flash</div>
+  </footer>
+
+</body>
+</html>
